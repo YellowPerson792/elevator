@@ -1,4 +1,4 @@
-# include <stdio.h>test
+# include <stdio.h>
 
 int main()
 {
