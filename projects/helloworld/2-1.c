@@ -1,4 +1,4 @@
-# include <stdio.h>testagainandagain
+# include <stdio.h>testtest
 
 int main()
 {
@@ -11,16 +11,16 @@ int main()
 			sp[i] = 100, ep[i] = 100, spog[i] = 100, epog[i] = 100, tt[i] = 0;
 		move = 0, direction = 0, t = -1, number = 0, change = 1, show = 0;
 
-		printf("ÇëÊäÈëµçÌÝ³õÊ¼ËùÔÚÂ¥²ã£º");
+		printf("è¯·è¾“å…¥ç”µæ¢?åˆå?‹æ‰€åœ¨æ¥¼å±‚ï¼š");
 		scanf("%d", &location);
-		printf("ÇëÊäÈë³Ë×øµçÌÝµÄÓÃ»§×ÜÊý£º");
+		printf("è¯·è¾“å…¥ä¹˜åç”µæ¢?çš„ç”¨æˆ·æ€»æ•°ï¼?");
 		scanf("%d", &totalnumber);
-		printf("ÇëÊäÈë¸÷³Ë¿ÍÆðÊ¼Â¥²ãºÍÄ¿µÄÂ¥²ã£º¡¾ÆðÊ¼²ã¡¿ ¡¾Ä¿µÄ²ã¡¿ ¡¾Ê±¼ä¡¿\n");
+		printf("è¯·è¾“å…¥å„ä¹˜å?¢èµ·å§‹æ¥¼å±‚å’Œç›?çš„æ¥¼å±‚ï¼šã€èµ·å§‹å±‚ã€? ã€ç›®çš„å±‚ã€? ã€æ—¶é—´ã€‘\n");
 		for (int i = 0; i < totalnumber; ++i)
 		{
 			scanf("%d %d %d", &spog[i], &epog[i], &tt[i]);
 		}
-		printf("µçÌÝÔËÐÐ½á¹û£º¡¾Â¥²ã¡¿ ¡¾ÈËÊý¡¿ ¡¾Ê±¼ä¡¿\n");
+		printf("ç”µæ??è¿è?Œç»“æžœï¼šã€æ¥¼å±‚ã€? ã€äººæ•°ã€? ã€æ—¶é—´ã€‘\n");
 
 		for (int i = 0; i < 200; ++i)
 		{
