@@ -46,6 +46,31 @@ int main()
 			for (int i = 0; i < 20; ++i)
 				difference11[i] = 100, difference22[i] = 100;
 			
+			if (direction1 == 0)
+				for (int i = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100)
+					{
+						difference11[i] = abs(sp0[i] - location1);
+					}
+			if (direction1 == 1)
+				for (int i = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100)
+					{
+						if (sp0[i] > location1)
+							difference11[i] = sp0[i] - location1;
+						else
+							difference11[i] = 20 - sp0[i] - location1;
+					}
+			if (direction1 == -1)
+				for (int i = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100)
+					{
+						if (sp0[i] < location1)
+							difference11[i] = location1 - sp0[i];
+						else
+							difference11[i] = sp0[i] + location1 - 1;
+					}
+			
 			if (direction2 == 0)
 				for (int i = 0; i < 20; ++i)
 					if (sp0[i] != 100 && ep0[i] != 100)
@@ -70,170 +95,17 @@ int main()
 						else
 							difference22[i] = sp0[i] + location2 - 1;
 					}
-			if (direction1 == 0)
-				for (int i = 0; i < 20; ++i)
-					if (sp0[i] != 100 && ep0[i] != 100)
-					{
-						difference11[i] = abs(sp0[i] - location1);
-					}
-			if(direction1==1)
-				for (int i = 0; i < 20; ++i)
-					if (sp0[i] != 100 && ep0[i] != 100)
-					{
-						if (sp0[i] > location1)
-							difference11[i] = sp0[i] - location1;
-						else
-							difference11[i] = 20 - sp0[i] - location1;
-					}
-			if (direction1 == -1)
-				for (int i = 0; i < 20; ++i)
-					if (sp0[i] != 100 && ep0[i] != 100)
-					{
-						if (sp0[i] < location1)
-							difference11[i] = location1 - sp0[i];
-						else
-							difference11[i] = sp0[i] + location1 - 1;
-					}
-
 			
 
-
+			
 			for (int i = 0; i < 20; ++i)
 			{
-				
-				if (difference11[i] > difference22[i] && difference11 != 100 && difference22 != 100)
-					sp2[i] = sp0[i], ep2[i] = ep0[i], spog2[i] = spog0[i], epog2[i] = epog0[i];
-				if (difference11[i] <= difference22[i] && difference11 != 100 && difference22 != 100)
+				if (difference11[i] < difference22[i] && difference11 != 100 && difference22 != 100)
 					sp1[i] = sp0[i], ep1[i] = ep0[i], spog1[i] = spog0[i], epog1[i] = epog0[i];
+				if (difference11[i] > difference22[i] && difference11 != 100 && difference22 != 100)
+					sp2[i] = sp0[i], ep2[i] = ep0[i], spog2[i] = spog0[i], epog2[i] = epog0[i];		
 			}
-			
-																											
-			if (overload2 == 1)
-			{
-				for (int i = 0; i < 20; ++i)
-					if (sp2[i] != 100 && ep2[i] != 100)
-					{
-						sp2[i] = 100, ep2[i] = 100;
-					}
-			}
-
-			change2 = 1;
-			if ((move2 == 1) && (direction2 == -1))
-			{
-				for (int i = 0; i < 20; ++i)
-				{
-					if (sp2[i] != 100 && sp2[i] < location2)
-					{
-						location2 = location2 - 1, change2 = 0;
-						break;
-					}
-				}
-				if (change2 == 1)
-				{
-					for (int i = 0; i < 20; ++i)
-					{
-						if (sp2[i] != 100 && sp2[i] > location2)
-							direction2 = 1;
-					}
-				}
-			}
-			if ((move2 == 1) && (direction2 == 1))
-			{
-				for (int i = 0; i < 20; ++i)
-				{
-
-					if (sp2[i] != 100 && sp2[i] > location2)
-					{
-						location2 = location2 + 1, change2 = 0;
-						break;
-					}
-				}
-				if (change2 == 1)
-				{
-					for (int i = 0; i < 20; ++i)
-					{
-						if (sp2[i] != 100 && sp2[i] < location2)
-							direction2 = -1;
-					}
-					t = t - 1;
-				}
-			}
-			if (move2 == 1 && direction2 == 0)
-			{
-				change2 = 0, direction2 = 1, t = t - 1;
-			}
-
-			if (change2 == 0)
-			{
-				for (int i = 0; i < 20; ++i)
-				{
-					if (location2 == epog2[i] && sp2[i] != 100 && ep2[i] == 100)
-					{
-						number2--;
-						overload2 = 0;
-						continue;
-					}
-				}
-				for (int i = 0; i < 20; ++i)
-				{
-					if (location2 == spog2[i] && ep2[i] != 100)
-					{
-						number2++;
-						continue;
-					}
-				}
-
-				if (overload2 == 0 && recovery2 == 1)
-					for (int i = 0; i < 20; ++i)
-						sp2[i] = spc2[i], ep2[i] = epc2[i], recovery2 = 0;
-
-				for (int i = 0; i < 20; ++i)
-				{
-					if (location2 == sp2[i])
-					{
-						show2 = 1;
-						sp2[i] = ep2[i];
-						ep2[i] = 100;
-					}
-				}
-				if (show2 == 1)
-				{
-					printf("µçÌÝ2£º%d %d %d\n", location2, number2, t);
-					for (int i = 0; i < 20; ++i)
-						printf("%d\n", sp2[i]);
-					show2 = 0;
-				}
-			}
-
-			if (overload2 == 0)
-			{
-				for (int i = 0; i < 20; ++i)
-					spc2[i] = sp2[i], epc2[i] = ep2[i];
-			}
-			if (number2 == 4)
-				overload2 = 1, recovery2 = 1;
-
-			for (int i = 0; i < 20; ++i)
-				difference2[i] = abs(sp2[i] - location2);
-			for (int i = 0, m = 100; i < 20; ++i)
-				if (m >= difference2[i])
-					m = difference2[i], target2 = i;
-			if ((move2 == 0) && (sp2[target2] != 100))
-			{
-				if (sp2[target2] < location2)
-					direction2 = -1;
-				if (sp2[target2] == location2)
-					direction2 = 0;
-				if (sp2[target2] > location2)
-					direction2 = 1;
-			}
-			if (sp2[target2] == 100)
-				move2 = 0, direction2 = 0;
-			else
-				move2 = 1;
-
-
-
+																														
 			if (overload1 == 1)
 			{
 				for (int i = 0; i < 20; ++i)
@@ -281,7 +153,6 @@ int main()
 						if (sp1[i] != 100 && sp1[i] < location1)
 							direction1 = -1;
 					}
-					t = t - 1;
 				}
 			}
 			if (move1 == 1 && direction1 == 0)
@@ -325,8 +196,6 @@ int main()
 				if (show1 == 1)
 				{
 					printf("µçÌÝ1£º%d %d %d\n", location1, number1, t);
-					for (int i = 0; i < 20; ++i)
-						printf("%d\n", sp1[i]);
 					show1 = 0;
 				}
 			}
@@ -357,21 +226,141 @@ int main()
 				move1 = 0, direction1 = 0;
 			else
 				move1 = 1;
+			
+
+			
+			if (overload2 == 1)
+			{
+				for (int i = 0; i < 20; ++i)
+					if (sp2[i] != 100 && ep2[i] != 100)
+					{
+						sp2[i] = 100, ep2[i] = 100;
+					}
+			}
+
+			change2 = 1;
+			if ((move2 == 1) && (direction2 == -1))
+			{
+				for (int i = 0; i < 20; ++i)
+				{
+					if (sp2[i] != 100 && sp2[i] < location2)
+					{
+						location2 = location2 - 1, change2 = 0;
+						break;
+					}
+				}
+				if (change2 == 1)
+				{
+					for (int i = 0; i < 20; ++i)
+					{
+						if (sp2[i] != 100 && sp2[i] > location2)
+							direction2 = 1;
+					}
+				}
+			}
+			if ((move2 == 1) && (direction2 == 1))
+			{
+				for (int i = 0; i < 20; ++i)
+				{
+
+					if (sp2[i] != 100 && sp2[i] > location2)
+					{
+						location2 = location2 + 1, change2 = 0;
+						break;
+					}
+				}
+				if (change2 == 1)
+				{
+					for (int i = 0; i < 20; ++i)
+					{
+						if (sp2[i] != 100 && sp2[i] < location2)
+							direction2 = -1;
+					}
+				}
+			}
+			if (move2 == 1 && direction2 == 0)
+			{
+				change2 = 0, direction2 = 1, t = t - 1;
+			}
+
+			if (change2 == 0)
+			{
+				for (int i = 0; i < 20; ++i)
+				{
+					if (location2 == epog2[i] && sp2[i] != 100 && ep2[i] == 100)
+					{
+						number2--;
+						overload2 = 0;
+						continue;
+					}
+				}
+				for (int i = 0; i < 20; ++i)
+				{
+					if (location2 == spog2[i] && ep2[i] != 100)
+					{
+						number2++;
+						continue;
+					}
+				}
+
+				if (overload2 == 0 && recovery2 == 1)
+					for (int i = 0; i < 20; ++i)
+						sp2[i] = spc2[i], ep2[i] = epc2[i], recovery2 = 0;
+
+				for (int i = 0; i < 20; ++i)
+				{
+					if (location2 == sp2[i])
+					{
+						show2 = 1;
+						sp2[i] = ep2[i];
+						ep2[i] = 100;
+					}
+				}
+				if (show2 == 1)
+				{
+					printf("µçÌÝ2£º%d %d %d\n", location2, number2, t);
+					show2 = 0;
+				}
+			}
+
+			if (overload2 == 0)
+			{
+				for (int i = 0; i < 20; ++i)
+					spc2[i] = sp2[i], epc2[i] = ep2[i];
+			}
+			if (number2 == 4)
+				overload2 = 1, recovery2 = 1;
+
+			for (int i = 0; i < 20; ++i)
+				difference2[i] = abs(sp2[i] - location2);
+			for (int i = 0, m = 100; i < 20; ++i)
+				if (m >= difference2[i])
+					m = difference2[i], target2 = i;
+			if ((move2 == 0) && (sp2[target2] != 100))
+			{
+				if (sp2[target2] < location2)
+					direction2 = -1;
+				if (sp2[target2] == location2)
+					direction2 = 0;
+				if (sp2[target2] > location2)
+					direction2 = 1;
+			}
+			if (sp2[target2] == 100)
+				move2 = 0, direction2 = 0;
+			else
+				move2 = 1;
 
 
+		
 			for (int i = 0; i < 20; ++i)
 				sp0[i] = 100, ep0[i] = 100;
 			for (int i = 0; i < 20; ++i)
 			{
-				
-				if (sp2[i] != 100 && ep2[i] != 100)
-					sp0[i] = sp2[i], sp2[i] = 100, ep0[i] = ep2[i], ep2[i] = 100, spog0[i] = spog2[i], spog2[i] = 100, epog0[i] = epog2[i], epog2[i] = 100;
 				if (sp1[i] != 100 && ep1[i] != 100)
 					sp0[i] = sp1[i], sp1[i] = 100, ep0[i] = ep1[i], ep1[i] = 100, spog0[i] = spog1[i], spog1[i] = 100, epog0[i] = epog1[i], epog1[i] = 100;
+				if (sp2[i] != 100 && ep2[i] != 100)
+					sp0[i] = sp2[i], sp2[i] = 100, ep0[i] = ep2[i], ep2[i] = 100, spog0[i] = spog2[i], spog2[i] = 100, epog0[i] = epog2[i], epog2[i] = 100;				
 			}
-
-
-
 		}
 	}
 }
