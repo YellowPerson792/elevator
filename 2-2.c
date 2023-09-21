@@ -4,10 +4,10 @@ int main()
 {
 	int t, totalnumber, tt[20], sp0[20], ep0[20], spog0[20], epog0[20],difference11[20],difference22[20];
 	
-	int move1, direction1, location1, number1, target1, change1, show1, overload1 = 0, recovery1 = 0;
+	int move1, direction1, location1, number1, target1, change1, show1, overload1 = 0, recovery1 = 0,d0_1=0;
 	int sp1[20], ep1[20], spog1[20], difference1[20], epog1[20], spc1[20], epc1[20];
 	
-	int move2, direction2, location2, number2, target2, change2, show2, overload2 = 0, recovery2 = 0;
+	int move2, direction2, location2, number2, target2, change2, show2, overload2 = 0, recovery2 = 0,d0_2=0;
 	int sp2[20], ep2[20], spog2[20], difference2[20], epog2[20] ,spc2[20], epc2[20];
 
 	for (;;)
@@ -68,7 +68,7 @@ int main()
 						if (sp0[i] < location1)
 							difference11[i] = location1 - sp0[i];
 						else
-							difference11[i] = sp0[i] + location1 - 1;
+							difference11[i] = sp0[i] + location1 - 2;
 					}
 			
 			if (direction2 == 0)
@@ -93,17 +93,17 @@ int main()
 						if (sp0[i] < location2)
 							difference22[i] = location2 - sp0[i];
 						else
-							difference22[i] = sp0[i] + location2 - 1;
+							difference22[i] = sp0[i] + location2 - 2;
 					}
 			
 
 			
 			for (int i = 0; i < 20; ++i)
 			{
-				if (difference11[i] < difference22[i] && difference11 != 100 && difference22 != 100)
+				if ((difference11[i] <= difference22[i]) && (difference11[i] != 100) && (difference22[i] != 100))
 					sp1[i] = sp0[i], ep1[i] = ep0[i], spog1[i] = spog0[i], epog1[i] = epog0[i];
-				if (difference11[i] > difference22[i] && difference11 != 100 && difference22 != 100)
-					sp2[i] = sp0[i], ep2[i] = ep0[i], spog2[i] = spog0[i], epog2[i] = epog0[i];		
+				if ((difference11[i] > difference22[i]) && (difference11[i] != 100) && (difference22[i] != 100))
+					sp2[i] = sp0[i], ep2[i] = ep0[i], spog2[i] = spog0[i], epog2[i] = epog0[i];
 			}
 																														
 		back1:
@@ -161,7 +161,7 @@ int main()
 			}
 			if (move1 == 1 && direction1 == 0)
 			{
-				change1 = 0, direction1 = 1, t = t - 1;
+				change1 = 0, direction1 = 1, d0_1=1;
 			}
 
 			if (change1 == 0)
@@ -199,7 +199,7 @@ int main()
 				}
 				if (show1 == 1)
 				{
-					printf("电梯1：%d %d %d\n", location1, number1, t);
+					printf("电梯1：%d %d %d\n", location1, number1, (d0_1==0)?t:t-1);
 					show1 = 0;
 				}
 			}
@@ -230,6 +230,12 @@ int main()
 				move1 = 0, direction1 = 0;
 			else
 				move1 = 1;
+
+			if (d0_1 == 1)
+			{
+				d0_1 = 0;
+				goto back1;
+			}
 			
 
 			
@@ -288,7 +294,7 @@ int main()
 			}
 			if (move2 == 1 && direction2 == 0)
 			{
-				change2 = 0, direction2 = 1;
+				change2 = 0, direction2 = 1,d0_2=1;
 			}
 
 			if (change2 == 0)
@@ -326,7 +332,7 @@ int main()
 				}
 				if (show2 == 1)
 				{
-					printf("电梯2：%d %d %d\n", location2, number2, t);
+					printf("电梯2：%d %d %d\n", location2, number2, (d0_2 == 0) ? t : t - 1);
 					show2 = 0;
 				}
 			}
@@ -357,6 +363,12 @@ int main()
 				move2 = 0, direction2 = 0;
 			else
 				move2 = 1;
+
+			if (d0_2 == 1)
+			{
+				d0_2 = 0;
+				goto back2;
+			}
 
 
 		
