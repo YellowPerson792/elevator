@@ -106,6 +106,7 @@ int main()
 					sp2[i] = sp0[i], ep2[i] = ep0[i], spog2[i] = spog0[i], epog2[i] = epog0[i];		
 			}
 																														
+		back1:
 			if (overload1 == 1)
 			{
 				for (int i = 0; i < 20; ++i)
@@ -151,7 +152,10 @@ int main()
 					for (int i = 0; i < 20; ++i)
 					{
 						if (sp1[i] != 100 && sp1[i] < location1)
+						{
 							direction1 = -1;
+							goto back1;
+						}
 					}
 				}
 			}
@@ -229,6 +233,7 @@ int main()
 			
 
 			
+			back2:
 			if (overload2 == 1)
 			{
 				for (int i = 0; i < 20; ++i)
@@ -274,13 +279,16 @@ int main()
 					for (int i = 0; i < 20; ++i)
 					{
 						if (sp2[i] != 100 && sp2[i] < location2)
+						{
 							direction2 = -1;
+							goto back2;
+						}
 					}
 				}
 			}
 			if (move2 == 1 && direction2 == 0)
 			{
-				change2 = 0, direction2 = 1, t = t - 1;
+				change2 = 0, direction2 = 1;
 			}
 
 			if (change2 == 0)
