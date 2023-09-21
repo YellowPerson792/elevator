@@ -4,10 +4,10 @@ int main()
 {
 	int t, totalnumber, tt[20], sp0[20], ep0[20], spog0[20], epog0[20],difference11[20],difference22[20];
 	
-	int move1, direction1, location1, number1, target1, change1, show1, overload1 = 0, recovery1 = 0,d0_1=0;
+	int move1, direction1, location1, number1, target1, change1, show1, overload1 = 0, recovery1 = 0,d0_1=0,target11;
 	int sp1[20], ep1[20], spog1[20], difference1[20], epog1[20], spc1[20], epc1[20];
 	
-	int move2, direction2, location2, number2, target2, change2, show2, overload2 = 0, recovery2 = 0,d0_2=0;
+	int move2, direction2, location2, number2, target2, change2, show2, overload2 = 0, recovery2 = 0,d0_2=0,target22;
 	int sp2[20], ep2[20], spog2[20], difference2[20], epog2[20] ,spc2[20], epc2[20];
 
 	for (;;)
@@ -53,23 +53,38 @@ int main()
 						difference11[i] = abs(sp0[i] - location1);
 					}
 			if (direction1 == 1)
+			{
 				for (int i = 0; i < 20; ++i)
+				{
 					if (sp0[i] != 100 && ep0[i] != 100)
 					{
 						if (sp0[i] > location1)
 							difference11[i] = sp0[i] - location1;
-						else
-							difference11[i] = 20 - sp0[i] - location1;
 					}
+				}
+				for (int i = 0, m = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100 && m <= sp0[i])
+						m = sp0[i], target11 = i;
+				for (int i = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100 && sp0[i] < location1)
+						difference11[i] = 2 * sp0[target11] - sp0[i] - location1;
+			}
+				
 			if (direction1 == -1)
+			{
 				for (int i = 0; i < 20; ++i)
 					if (sp0[i] != 100 && ep0[i] != 100)
 					{
 						if (sp0[i] < location1)
 							difference11[i] = location1 - sp0[i];
-						else
-							difference11[i] = sp0[i] + location1 - 2;
 					}
+				for (int i = 0, m = 100; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100 && m >= sp0[i])
+						m = sp0[i], target11 = i;
+				for (int i = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100 && sp0[i] > location1)
+						difference11[i] = sp0[i] + location1 - 2*sp0[target11];
+			}
 			
 			if (direction2 == 0)
 				for (int i = 0; i < 20; ++i)
@@ -78,23 +93,38 @@ int main()
 						difference22[i] = abs(sp0[i] - location2);
 					}
 			if (direction2 == 1)
+			{
 				for (int i = 0; i < 20; ++i)
+				{
 					if (sp0[i] != 100 && ep0[i] != 100)
 					{
 						if (sp0[i] > location2)
 							difference22[i] = sp0[i] - location2;
-						else
-							difference2[i] = 20 - sp0[i] - location2;
 					}
+				}
+				for (int i = 0, m = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100 && m <= sp0[i])
+						m = sp0[i], target22 = i;
+				for (int i = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100 && sp0[i] < location2)
+						difference22[i] = 2 * sp0[target22] - sp0[i] - location2;
+			}
+
 			if (direction2 == -1)
+			{
 				for (int i = 0; i < 20; ++i)
 					if (sp0[i] != 100 && ep0[i] != 100)
 					{
 						if (sp0[i] < location2)
 							difference22[i] = location2 - sp0[i];
-						else
-							difference22[i] = sp0[i] + location2 - 2;
 					}
+				for (int i = 0, m = 100; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100 && m >= sp0[i])
+						m = sp0[i], target22 = i;
+				for (int i = 0; i < 20; ++i)
+					if (sp0[i] != 100 && ep0[i] != 100 && sp0[i] > location2)
+						difference22[i] = sp0[i] + location2 - 2 * sp0[target22];
+			}
 			
 
 			
@@ -105,6 +135,8 @@ int main()
 				if ((difference11[i] > difference22[i]) && (difference11[i] != 100) && (difference22[i] != 100))
 					sp2[i] = sp0[i], ep2[i] = ep0[i], spog2[i] = spog0[i], epog2[i] = epog0[i];
 			}
+
+
 																														
 		back1:
 			if (overload1 == 1)
@@ -201,6 +233,7 @@ int main()
 				{
 					printf("µçÌÝ1£º%d %d %d\n", location1, number1, (d0_1==0)?t:t-1);
 					show1 = 0;
+					
 				}
 			}
 
@@ -333,7 +366,9 @@ int main()
 				if (show2 == 1)
 				{
 					printf("µçÌÝ2£º%d %d %d\n", location2, number2, (d0_2 == 0) ? t : t - 1);
+					
 					show2 = 0;
+					
 				}
 			}
 
@@ -381,6 +416,7 @@ int main()
 				if (sp2[i] != 100 && ep2[i] != 100)
 					sp0[i] = sp2[i], sp2[i] = 100, ep0[i] = ep2[i], ep2[i] = 100, spog0[i] = spog2[i], spog2[i] = 100, epog0[i] = epog2[i], epog2[i] = 100;				
 			}
+			
 		}
 	}
 }
