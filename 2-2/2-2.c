@@ -24,7 +24,7 @@ int main()
 			tt[i] = 0;
 		}
 
-		printf("请输入两部电梯分别初始所在楼层：");
+		printf("请输入两部电梯分别初始所在楼层：【电梯1】 【电梯2】");
 		scanf("%d %d", &location1, &location2);
 		printf("请输入乘坐电梯的用户总数：");
 		scanf("%d", &totalnumber);
