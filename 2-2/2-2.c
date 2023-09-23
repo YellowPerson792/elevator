@@ -33,17 +33,17 @@ int main()
 		{
 			scanf("%d %d %d", &spog0[i], &epog0[i], &tt[i]);
 		}
-		printf("电梯运行结果：【楼层】 【人数】 【时间】\n");
+		printf("电梯运行结果：【楼层】 【人数】 【时间】\n");//输入信息
 		
-		for (int i = 0; i < 200; ++i)
+		for (int i = 0; i < 200; ++i)//循环次数代表时间
 		{
 			t = t + 1;
 			for (int i = 0; i < 20; ++i)
 				if (tt[i] == t)
-					sp0[i] = spog0[i], ep0[i] = epog0[i];
+					sp0[i] = spog0[i], ep0[i] = epog0[i];//时间到了将乘客信息告知电梯
 
 			for (int i = 0; i < 20; ++i)
-				difference11[i] = 100, difference22[i] = 100;
+				difference11[i] = 100, difference22[i] = 100;//100的作用相当于Null
 			
 			if (direction1 == 0)
 				for (int i = 0; i < 20; ++i)
@@ -153,11 +153,11 @@ int main()
 						if (sp0[i] != 100 && ep0[i] != 100 && sp0[i] > location2)
 							difference22[i] = sp0[i] - location2;
 				special22 = 1;
-			}
+			}                                                           
 			
 
 			
-			for (int i = 0; i < 20; ++i)
+			for (int i = 0; i < 20; ++i)//将乘客合理分配给两部电梯
 			{
 				if ((difference11[i] <= difference22[i]) && (difference11[i] != 100) && (difference22[i] != 100))
 					sp1[i] = sp0[i], ep1[i] = ep0[i], spog1[i] = spog0[i], epog1[i] = epog0[i];
@@ -167,8 +167,8 @@ int main()
 
 			
 																														
-		back1:
-			if (overload1 == 1)
+		back1://1号电梯系统
+			if (overload1 == 1)//若超载，不接客
 			{
 				for (int i = 0; i < 20; ++i)
 					if (sp1[i] != 100 && ep1[i] != 100)
@@ -177,7 +177,7 @@ int main()
 					}
 			}
 
-			change1 = 1;
+			change1 = 1;//电梯的运动和转向系统
 			if ((move1 == 1) && (direction1 == -1))
 			{
 				for (int i = 0; i < 20; ++i)
@@ -215,7 +215,7 @@ int main()
 						if (sp1[i] != 100 && sp1[i] < location1)
 						{
 							direction1 = -1;
-							goto back1;
+							goto back1;//用goto解决代码运行不对称的问题
 						}
 					}
 				}
@@ -225,7 +225,7 @@ int main()
 				change1 = 0, direction1 = 1;
 			}
 
-			if (change1 == 0)
+			if (change1 == 0)//上下人系统
 			{
 				for (int i = 0; i < 20; ++i)
 				{
@@ -249,7 +249,7 @@ int main()
 					for (int i = 0; i < 20; ++i)
 						sp1[i] = spc1[i], ep1[i] = epc1[i], recovery1 = 0;
 
-				for (int i = 0; i < 20; ++i)
+				for (int i = 0; i < 20; ++i)//显示电梯运行情况
 				{
 					if (location1 == sp1[i])
 					{
@@ -283,7 +283,7 @@ int main()
 				if (m == 0)
 					special1 = 1;
 			}
-			if ((move1 == 0) && (sp1[target1] != 100))
+			if ((move1 == 0) && (sp1[target1] != 100))//电梯由静转动时判断方向
 			{
 				if (sp1[target1] < location1)
 					direction1 = -1;
@@ -300,12 +300,12 @@ int main()
 			{
 				move1 = 1;
 				special1 = 0;
-				goto back1;
+				goto back1;//goto用于特殊情况下防止时间增加
 			}
 			
 
 			
-			back2:
+			back2://2号电梯
 			if (overload2 == 1)
 			{
 				for (int i = 0; i < 20; ++i)
@@ -444,7 +444,7 @@ int main()
 
 
 		
-			for (int i = 0; i < 20; ++i)
+			for (int i = 0; i < 20; ++i)//将两部电梯未接的乘客信息合并到总的数组，方便下次将待接乘客重新分配给两部电梯
 				sp0[i] = 100, ep0[i] = 100;
 			for (int i = 0; i < 20; ++i)
 			{

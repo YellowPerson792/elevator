@@ -20,17 +20,17 @@ int main()
 		{
 			scanf("%d %d %d", &spog[i], &epog[i], &tt[i]);
 		}
-		printf("电梯运行结果：【楼层】 【人数】 【时间】\n");
+		printf("电梯运行结果：【楼层】 【人数】 【时间】\n");//输入信息
 
 		for (int i = 0; i < 200; ++i)
 		{
 			t = t + 1;
 			for (int i = 0; i < 10; ++i)
 				if (tt[i] == t)
-					sp[i] = spog[i], ep[i] = epog[i];
+					sp[i] = spog[i], ep[i] = epog[i];//时间到了就将乘客信息告知电梯
 			
-			back:
-			if (overload == 1)
+			back://电梯运动、超载和显示系统
+			if (overload == 1)//若超载，不接人
 			{
 				for (int i = 0; i < 10; ++i)
 					if (sp[i] != 100 && ep[i] != 100)
@@ -39,7 +39,7 @@ int main()
 					}
 			}
 
-			change = 1;
+			change = 1;//实现电梯运动功能
 			if ((move == 1) && (direction == -1))
 			{
 				for (int i = 0; i < 10; ++i)
@@ -88,7 +88,7 @@ int main()
 				change = 0, direction = 1;
 			}
 
-			if (change == 0)
+			if (change == 0)//实现电梯上下人功能
 			{
 				for (int i = 0; i < 10; ++i)
 				{
@@ -112,7 +112,7 @@ int main()
 					for (int i = 0; i < 10; ++i)
 						sp[i] = spc[i], ep[i] = epc[i], recovery = 0;
 
-				for (int i = 0; i < 10; ++i)
+				for (int i = 0; i < 10; ++i)//显示电梯运行状态
 				{
 					if (location == sp[i])
 					{
@@ -145,7 +145,7 @@ int main()
 				if (m == 0)
 					special = 1;
 			}
-			if ((move == 0) && (sp[target] != 100))
+			if ((move == 0) && (sp[target] != 100))//电梯由静转动时判断方向
 			{
 				if (sp[target] < location)
 					direction = -1;
@@ -164,7 +164,7 @@ int main()
 			{
 				move = 1;
 				special = 0;
-				goto back;
+				goto back;//用goto是为了特殊情况下防止时间增加
 			}			
 		}
 	}
